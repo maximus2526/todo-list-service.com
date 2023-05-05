@@ -1,0 +1,101 @@
+/* NULL */
+body{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    font-size: 100%;
+}
+a {
+    text-decoration: none;
+}    
+
+/* Container */
+
+.container {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    max-width: 80%;
+}
+
+/* Header */
+
+.header {
+    display: flex;
+    background: #ececec;
+    align-items: center;
+    justify-content: space-around;
+    border: 1px solid rgb(168, 168, 168);
+    border-radius: 7px;
+    
+}
+
+.logo-img {
+    width: 30%;
+}
+.nav {
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+}
+.nav-elem {
+    display: block;
+    
+}
+
+
+/* content */
+.content{
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.content h1 {
+    text-align: center;
+    
+}
+
+.block-title {
+    background-color: #f2f2f2; 
+    border-bottom: 1px solid #ccc;
+    padding: 5px;
+    margin: -10px -10px 10px;
+}
+
+.add-task {
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    padding: 10px;
+  }
+
+.tasks{
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    padding: 10px;
+}
+
+.block-form button{
+    color: white;
+    background-color: #007dff;
+    border: none;
+    border-radius: 5px;
+    height: 35px;
+    width: 65px;
+}
+
+input {
+    width: calc(100% - 10px);
+    height: 30px;
+}
+
+input::placeholder {
+    padding-left: 7px;
+}
+
+input:focus::placeholder {
+    color: white;
+
+}
+
