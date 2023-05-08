@@ -41,7 +41,6 @@ a {
 }
 .nav-elem {
     display: block;
-    
 }
 
 
@@ -76,13 +75,25 @@ a {
     padding: 10px;
 }
 
-.block-form button{
-    color: white;
-    background-color: #007dff;
+button{
+    font-weight: 600;
     border: none;
     border-radius: 5px;
     height: 35px;
-    width: 65px;
+    width: 70px;
+}
+
+button:hover{
+    opacity: 50%;
+}
+
+button:active{
+    opacity: 90%;
+}
+
+.submit-btn{
+    color: white;
+    background-color: #007dff;
 }
 
 input {
@@ -99,3 +110,42 @@ input:focus::placeholder {
 
 }
 
+
+/* Table Tasks*/
+.btn-form{
+    display: inline;
+}
+
+.table {
+    width: 100%;
+}
+
+.row {
+    text-align: center;
+}
+
+.complete-btn{
+    color: white;
+    background-color: #007dff;
+}
+
+.delete-btn{
+    color: rgb(255, 255, 255);
+    background-color: #fa5353;
+}
+
+/* Footer */
+
+.footer{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background: #ececec;
+    width: 100%;
+    border: 1px solid rgb(168, 168, 168);
+    border-radius: 5px;
+}
+
+.footer .nav {
+    width: 20%;
+}
