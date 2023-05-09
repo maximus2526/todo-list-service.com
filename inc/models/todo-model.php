@@ -39,7 +39,7 @@
             }
             return $statement;
         }
-        protected function get_parametrize_value($value){
+        protected function get_parametrize_value(string $value){
             // function for array map
             return ":" . $value;
         }
@@ -51,7 +51,7 @@
             $this->execQuery($sql, $data);
         }
 
-        public function deleteTodo($entries_id){
+        public function deleteTodo(int $entries_id){
             $sql = "DELETE FROM `to-does` WHERE `todo_id` = $entries_id;";
             $this->execQuery($sql);
         }
@@ -60,21 +60,20 @@
             return $this->execQuery($sql)->fetchAll();
         }
 
+        public function changeStatus(int $entries_id, string $todo_status){
+            $sql = "UPDATE `to-does` SET `todo_status` = '{$todo_status}' WHERE `to-does`.`todo_id` = {$entries_id};";
+            $this->execQuery($sql);
+
+        }
+
         public function clearTable(){
             $sql = "TRUNCATE `to-does`;";
             $this->execQuery($sql);
         }
 
 
+
+
     }
-
-    // $test = new ToDoActions();
-    // $params = [
-    //     'user' => 'admin',
-    //     'todo_status' => 1,
-    //     'todo_item' => '3211232312313'
-
-    // ];
-    // $test->addTodo($params);
     ?>
 

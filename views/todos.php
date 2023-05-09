@@ -22,19 +22,23 @@
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
-                    <?php 
-                    $todos = getTodosAction();
-                    foreach($todos as $entry): 
-                        $todo_id = $entry['todo_id']
+                    <?php     
+                    foreach($tamplate_data['todoes'] as $entry): 
+
                     ?>
                         <tr class = 'row'>
-                            <td><?php echo $entry['todo_item'] ?></td>
+                            <td class='<?php echo $entry['todo_status']?>'><?php echo $entry['todo_item'] ?></td>
                             <td><?php echo $entry['todo_status'] ?></td>
                             <td>
-                                <form class = "btn-form" action="/?action=<?php echo 'Complete'?>" method = "POST">
-                                    <button class="complete-btn" type="submit"><?php echo 'Complete'?></button>
+                                <form 
+                                class = "btn-form" 
+                                action="/?action=<?php echo $entry['todo_status']?>&todo_id=<?php echo $entry['todo_id']?>" 
+                                method = "POST">
+                                    <button class="<?php echo $entry['todo_status']?>-btn" type="submit">
+                                        <?php echo ucfirst($entry['todo_status'])?>
+                                    </button>
                                 </form>
-                                <form class = "btn-form" action="/?action=delete&todo_id=<?php echo $todo_id?>" method = "POST">
+                                <form class = "btn-form" action="/?action=delete&todo_id=<?php echo $entry['todo_id']?>" method = "POST">
                                     <button class="delete-btn" type="submit">Delete</button>
                                 </form>
                             </td>

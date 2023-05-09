@@ -120,8 +120,13 @@ input:focus::placeholder {
     width: 100%;
 }
 
-.row {
+.row{
     text-align: center;
+
+}
+
+.incomplete {
+    text-decoration:line-through;
 }
 
 .complete-btn{
@@ -129,9 +134,50 @@ input:focus::placeholder {
     background-color: #007dff;
 }
 
+.incomplete-btn{
+    width: 80px;
+    color: white;
+    background-color: #a3a3a3;
+}
+
 .delete-btn{
     color: rgb(255, 255, 255);
     background-color: #fa5353;
+}
+
+
+/* Auth */
+
+.auth-form {
+    height: 700px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.singup-form {
+    padding: 35px;
+    border-left: 2px solid rgb(179, 179, 179);
+    display: flex;
+    flex-direction: column;
+    height: 300px;
+}
+.login-form {
+    border-radius: 10px;
+    padding: 35px;
+    background: #363434;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    height: 300px;
+}
+
+.input-items{
+    margin-bottom: 20px;
+}
+
+.header-txt{
+    font-weight: 800;
 }
 
 /* Footer */
