@@ -3,9 +3,8 @@
                     <p>2023 © TODOS</p>
                 </div>
                 <nav class="nav">
-                    <a href="#" class="nav-elem">About</a>
-                    <a href="#" class="nav-elem">ToDo</a>
-                    <a href="#" class="nav-elem">Login</a>
+                    <a href="/?action=about" class="nav-elem">About</a>
+                    <a href="/?action=auth" class="nav-elem">Login</a>
                 </nav>
             </div>
         </div>
