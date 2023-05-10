@@ -7,6 +7,9 @@ class TodoController{
         // ТУТ БУДУТЬ КУКИ ДЛЯ ОБРОБКИ ПОМИЛОК
     }
 
+    public function __destruct(){
+        // ТУТ ВИДАЛЕННЯ КУКІВ
+    }
     public function render_main_page(array $tamplate_data){
         render('todos', $tamplate_data); 
     }
