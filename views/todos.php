@@ -23,6 +23,7 @@
                         <th>Action</th>
                     </tr>
                     <?php     
+                    
                     foreach($tamplate_data['todoes'] as $entry): 
 
                     ?>
