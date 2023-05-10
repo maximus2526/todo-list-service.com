@@ -45,5 +45,8 @@
                     </td>
                 </tr>
             <?php endforeach ?>
-        </table>
+        </table> 
     </div>
+    <form action="" method="get">
+        <button name="page_num" value="1" type="submit" class="<?php echo $btn_class ?>">1</button>
+    </form>

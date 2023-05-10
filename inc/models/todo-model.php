@@ -22,6 +22,11 @@
             $sql = "SELECT * FROM `{$this->table}`;";
             return $this->execQuery($sql)->fetchAll();
         }
+        public function getPaginatedTodos(array $options){
+            $offset = ($options['page_num'] - 1)*$options['entries_limit'] ;
+            $sql = "SELECT * FROM `{$this->table}` ORDER BY `{$this->table}`.`todo_id` ASC LIMIT {$options['entries_limit']} OFFSET {$offset};";
+            return $this->execQuery($sql)->fetchAll();
+        }
 
         public function changeStatus(int $entries_id, string $todo_status){
             $sql = "UPDATE `{$this->table}` SET `todo_status` = '{$todo_status}' 
