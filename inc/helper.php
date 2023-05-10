@@ -5,9 +5,3 @@ function get_url(){
 }
 
 
-function render(string $name, array $tamplate_data){
-    include_once 'views/header.php';
-    include_once 'views/' . $name . '.php';
-    include_once 'views/footer.php';
-    
-}

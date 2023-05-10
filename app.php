@@ -1,11 +1,11 @@
 <?php 
 
     include_once 'inc/router.php';
-    
-    $action = $_GET['action'];
-    $todo_id = $_GET['todo_id'];
-    $todo_status = $_GET['todo_status'];
-    $page = $_GET['page'];
+    function render(string $name, array $tamplate_data){
+        include_once 'views/header.php';
+        include_once 'views/' . $name . '.php';
+        include_once 'views/footer.php';
+    }
 
     $tamplate_data['todoes'] = $controller->getTodosAction();
     switch($page){

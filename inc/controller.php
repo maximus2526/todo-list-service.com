@@ -34,8 +34,8 @@ class TodoController{
 
 }
 
-$model = new ToDoActions();
-$controller = new TodoController($model);
+$todo_model = new ToDoActions();
+$controller = new TodoController($todo_model);
 
 ?>
 
