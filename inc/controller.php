@@ -1,5 +1,4 @@
 <?php
-include "models/todo-model.php";
 
 class TodoController{
     public $modelobj;
@@ -7,6 +6,19 @@ class TodoController{
         $this->modelobj = $modelobj;
         // ТУТ БУДУТЬ КУКИ ДЛЯ ОБРОБКИ ПОМИЛОК
     }
+
+    public function render_main_page(array $tamplate_data){
+        render('todos', $tamplate_data); 
+    }
+
+    public function render_about(){
+        render('about'); 
+    }
+
+    public function render_auth(){
+        render('auth'); 
+    }
+
     public function addTodoAction(string $todo_item){
         $params = [
             'user' => 'admin',
@@ -30,6 +42,10 @@ class TodoController{
     public function delTodosAction(int $todo_id){
         return $this->modelobj->deleteTodo($todo_id);
     }
+
+
+
+
     
 
 }

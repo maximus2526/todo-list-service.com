@@ -24,7 +24,7 @@
                     </tr>
                     <?php     
                     
-                    foreach($tamplate_data['todoes'] as $entry): 
+                    foreach($todoes as $entry): 
 
                     ?>
                         <tr class = 'row'>
