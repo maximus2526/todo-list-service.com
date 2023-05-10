@@ -2,16 +2,26 @@
 
 class TodoController{
     public $modelobj;
+    public $todo_id;
+    public $todo_item;
     public function __construct($modelobj){
         $this->modelobj = $modelobj;
+        $this->todo_id = $_GET['todo_id'];
+        $this->todo_item = $_POST['todo_item'];
         // ТУТ БУДУТЬ КУКИ ДЛЯ ОБРОБКИ ПОМИЛОК
     }
 
     public function __destruct(){
         // ТУТ ВИДАЛЕННЯ КУКІВ
     }
-    public function render_main_page(array $tamplate_data){
-        render('todos', $tamplate_data); 
+
+    protected function get_tamplate_data(){
+        $tamplate_data['todoes'] = $this->getTodosAction();
+        return $tamplate_data;
+    }
+
+    public function render_main_page(){
+        render('todos', $this->get_tamplate_data()); 
     }
 
     public function render_about(){
@@ -22,13 +32,13 @@ class TodoController{
         render('auth'); 
     }
 
-    public function addTodoAction(string $todo_item){
+    public function addTodoAction(){
+        
         $params = [
             'user' => 'admin',
             'todo_status' => 'complete',
-            'todo_item' => $todo_item
-        ];
-        
+            'todo_item' => $this->todo_item
+        ]; 
         $this->modelobj->addTodo($params);
         
     }
@@ -38,12 +48,12 @@ class TodoController{
     }
     
     
-    public function changeStatusAction(int $entries_id, string $todo_status){
-        return $this->modelobj->changeStatus($entries_id, $todo_status);
+    public function changeStatusAction(string $todo_status){
+        return $this->modelobj->changeStatus($this->todo_id, $todo_status);
     }
     
-    public function delTodosAction(int $todo_id){
-        return $this->modelobj->deleteTodo($todo_id);
+    public function delTodosAction(){
+        return $this->modelobj->deleteTodo($this->todo_id);
     }
 
 
