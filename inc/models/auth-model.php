@@ -2,7 +2,7 @@
 <?php 
     include_once 'db-model.php';
     class AuthActions extends Connection{
-
+        
 
 
     }
@@ -21,6 +21,7 @@
             $sql = "DELETE FROM `users` WHERE `user_id` = $entries_id;";
             $this->execQuery($sql);
         }
+
     }   
     ?>
 

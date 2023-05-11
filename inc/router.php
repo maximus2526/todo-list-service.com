@@ -7,16 +7,16 @@
             $controller->renderAuth();
             break;
         case 'add':
-            $controller->addTodoAction();
+            $controller->addTodo();
             break;
         case 'complete':
-            $controller->changeStatusAction('incomplete'); 
+            $controller->changeStatus('incomplete'); 
             break;
         case 'incomplete':
-            $controller->changeStatusAction('complete'); 
+            $controller->changeStatus('complete'); 
             break;
         case 'delete':
-            $controller->delTodosAction();
+            $controller->delTodos();
             break; 
         default:
             $controller->renderMainPage();

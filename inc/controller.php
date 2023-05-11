@@ -28,8 +28,8 @@ class TodoController{
             'entries_limit' => $this->limit_per_page,
         ];
         $this->tamplate_data = [
-            'todoes' => $this->modelobj->getPaginatedTodos($page_options),
-            'pages' => $this->modelobj->getCountOfButtons($page_options), 
+            'todoes' => $this->modelobj->getPaginatedTodosAction($page_options),
+            'pages' => $this->modelobj->getCountOfButtonsAction($page_options), 
         ];
     }
 
@@ -49,7 +49,7 @@ class TodoController{
         render('auth'); 
     }
 
-    public function addTodoAction(){
+    public function addTodo(){
         $params = [
             'user' => 'admin',
             'todo_status' => 'complete',
@@ -64,28 +64,32 @@ class TodoController{
             header("Location: /"); 
         }
         else {
-            $this->modelobj->addTodo($params);
+            $this->modelobj->addTodoAction($params);
             header("Location: /");
         }
     }
     
-    public function changeStatusAction(string $todo_status){
+    public function changeStatus(string $todo_status){
         $this->fkeyCheck();
         if(empty($_SESSION['errors']))
             $this->modelobj->changeStatus($this->todo_id, $todo_status);
         header("Location: /");
     }
     
-    public function delTodosAction(){
+    public function delTodos(){
         $this->fkeyCheck();
 
         if(empty($_SESSION['errors']))
-            $this->modelobj->deleteTodo($this->todo_id);
+            $this->modelobj->deleteTodoAction($this->todo_id);
         header("Location: /");
             
     }
 
 
+
+}
+
+class AuthController{
 
 }
 
