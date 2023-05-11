@@ -9,7 +9,7 @@ class TodoController{
 
     public function __construct($modelobj){
         session_start();
-        $this->limit_per_page = 5;
+        $this->limit_per_page = 10;
         $this->modelobj = $modelobj;
         $this->todo_id = $_GET['todo_id'];
         $this->todo_item = $_POST['todo_item'];
@@ -29,7 +29,7 @@ class TodoController{
         ];
         $this->tamplate_data = [
             'todoes' => $this->modelobj->getPaginatedTodos($page_options),
-            'pages' => $this->modelobj->getCountOfButtons(), 
+            'pages' => $this->modelobj->getCountOfButtons($page_options), 
         ];
     }
 
@@ -55,11 +55,13 @@ class TodoController{
             'todo_status' => 'complete',
             'todo_item' => strip_tags($this->todo_item)
         ]; 
-       
-
-        if(empty($this->todo_item)){
-            $this->setError('Do not typed any text!');
+        
+        if(strlen($this->todo_item) > 100){
+            $this->setError('Your todo greater then 100 chars!');
             header("Location: /");      
+        } elseif(strlen($this->todo_item) < 4) {
+            $this->setError('Your todo lesser then 4 chars! Type more!');
+            header("Location: /"); 
         }
         else {
             $this->modelobj->addTodo($params);

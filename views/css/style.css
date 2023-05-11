@@ -57,7 +57,7 @@ a {
     width: 30%;
 }
 .nav {
-    width: 10%;
+    width: 15%;
     display: flex;
     justify-content: space-between;
 }
@@ -101,6 +101,7 @@ a {
   }
 
 .tasks{
+    overflow-wrap: anywhere;
     border: 1px solid #ccc;
     border-radius: 7px;
     padding: 10px;
@@ -240,4 +241,23 @@ input:focus::placeholder {
 
 .footer .nav {
     width: 10%;
+}
+
+
+@media screen and (max-width: 1024px) {
+    .container{
+        max-width: 95%;
+    }
+    .logo {
+        padding-left: 7px;
+    }
+    .nav {
+        width: 30%;
+        padding-right: 7px;
+    }
+    .footer .nav {
+        width: 30%;
+        justify-content: space-between;
+    }
+
 }

@@ -25,13 +25,13 @@
         public function deleteTodo(int $entries_id){
             $this->deleteEntry($entries_id, $this->table, $this->fk_column);
         }
-        public function getCountOfButtons(){
+        public function getCountOfButtons(array $options){
             $sql = "SELECT * FROM `{$this->table}`;";
             $all_todoes = $this->execQuery($sql)->fetchAll();
             if(empty($all_todoes)){
                 return array();
             }
-            return range(1, count(array_chunk($all_todoes, 5)));
+            return range(1, count(array_chunk($all_todoes, $options['entries_limit'])));
         }
         public function getPaginatedTodos(array $options){
             $offset = ($options['page_num'] - 1)*$options['entries_limit'] ;
