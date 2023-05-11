@@ -11,6 +11,13 @@
             $this->fk_column = 'todo_id';
         }
         
+        public function isEntryExist(int $entries_id){
+            $sql = "SELECT COUNT(*) FROM `{$this->table}` 
+            WHERE `{$this->fk_column}` = '{$entries_id}';";
+            $count_of_values = $this->execQuery($sql)->fetchColumn();
+            return $count_of_values > 0; 
+        }
+
         public function addTodo(array $todo_info){
             $this->addEntry($todo_info, $this->table);
         }
@@ -18,13 +25,18 @@
         public function deleteTodo(int $entries_id){
             $this->deleteEntry($entries_id, $this->table, $this->fk_column);
         }
-        public function getAllTodos(){
+        public function getCountOfButtons(){
             $sql = "SELECT * FROM `{$this->table}`;";
-            return $this->execQuery($sql)->fetchAll();
+            $all_todoes = $this->execQuery($sql)->fetchAll();
+            if(empty($all_todoes)){
+                return array();
+            }
+            return range(1, count(array_chunk($all_todoes, 5)));
         }
         public function getPaginatedTodos(array $options){
             $offset = ($options['page_num'] - 1)*$options['entries_limit'] ;
-            $sql = "SELECT * FROM `{$this->table}` ORDER BY `{$this->table}`.`todo_id` ASC LIMIT {$options['entries_limit']} OFFSET {$offset};";
+            $sql = "SELECT * FROM `{$this->table}` ORDER BY `{$this->table}`.`todo_id`
+            ASC LIMIT {$options['entries_limit']} OFFSET {$offset};";
             return $this->execQuery($sql)->fetchAll();
         }
 

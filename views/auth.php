@@ -6,7 +6,7 @@
           <input class="input-items" placeholder="Password" type="text">
           <input class="input-items" placeholder="Repeat Password" type="text">
           <input class="input-items" placeholder="E-mail" type="text">
-          <button class="submit-btn" type="submit">sing up</button>
+          <button class="submit-btn" type="submit">SING UP</button>
       </div>
       <div class="login-form">
           <p class="header-txt">LOGIN</p>
@@ -14,6 +14,6 @@
           
           <input class="input-items" placeholder="Username" type="text">
           <input class="input-items" placeholder="Password" type="text">
-          <button class="submit-btn" type="submit">login</button>
+          <button class="submit-btn" type="submit">LOGIN</button>
     </div>
 </div>

@@ -17,16 +17,19 @@
             <p>Tasks</p>
         </div>
         <table class='table'>
-            <tr class = 'row'>
+        <?php            
+            if(empty($todoes)):
+                echo 'Create your first todo!';
+            else:
+            ?>
+            <tr class = 'row-title'>
                 <th>Item</th>
                 <th>Status</th>
                 <th>Action</th>
             </tr>
-            <?php     
-            
-            foreach($todoes as $entry): 
-
-            ?>
+            <?php 
+            endif;
+            foreach($todoes as $entry):  ?>
                 <tr class = 'row'>
                     <td class='<?php echo $entry['todo_status']?>'><?php echo $entry['todo_item'] ?></td>
                     <td><?php echo $entry['todo_status'] ?></td>
@@ -44,9 +47,21 @@
                         </form>
                     </td>
                 </tr>
-            <?php endforeach ?>
+            <?php 
+            endforeach;
+            ?>
+        
+
         </table> 
     </div>
     <form action="" method="get">
-        <button name="page_num" value="1" type="submit" class="<?php echo $btn_class ?>">1</button>
+        <?php 
+        if (count($pages) > 1 ):
+            foreach($pages as $pagenum):  
+        ?>
+            <button name="page_num" value=<?php echo $pagenum ?> type="submit" class="page_num"><?php echo $pagenum ?></button>
+        <?php 
+            endforeach; 
+        endif
+        ?>
     </form>

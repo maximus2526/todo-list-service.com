@@ -1,10 +1,10 @@
 <?php 
     switch($_GET['action']){
         case 'about':
-            $controller->render_about();
+            $controller->renderAbout();
             break;
         case 'auth':
-            $controller->render_auth();
+            $controller->renderAuth();
             break;
         case 'add':
             $controller->addTodoAction();
@@ -19,7 +19,7 @@
             $controller->delTodosAction();
             break; 
         default:
-            $controller->render_main_page();
+            $controller->renderMainPage();
     }
 
 

@@ -1,10 +1,14 @@
 /* NULL */
+
+
 body{
+    font-family: cursive;
     margin: 0;
     padding: 0;
     height: 100%;
     width: 100%;
     font-size: 100%;
+    
 }
 a {
     text-decoration: none;
@@ -20,8 +24,26 @@ a {
 }
 
 /* Header */
+.errors{
+    font-family: 'Pacifico', cursive;
+    margin-top: 10px;
+    border: 1px solid rgb(168, 168, 168);
+    border-radius: 7px;
+    background: #ffb6b6;
+}
 
+.errors:hover{
+    transition: opacity .6s;
+    opacity: 70%;
+    
+}
+
+
+.errors-text{
+    margin-left: 30px;
+}
 .header {
+    font-family: 'Pacifico', cursive;
     display: flex;
     background: #ececec;
     align-items: center;
@@ -45,6 +67,12 @@ a {
 
 
 /* content */
+.about-text{
+    font-family: cursive;
+    font-weight: 100;
+    margin-bottom: 350px;
+}
+
 .content{
     display: flex;
     flex-direction: column;
@@ -52,6 +80,7 @@ a {
 }
 
 .content h1 {
+    font-family: 'Pacifico', cursive;
     text-align: center;
     
 }
@@ -78,24 +107,29 @@ a {
 }
 
 button{
-    font-weight: 600;
     border: none;
     border-radius: 5px;
+    font-family: cursive;
+    font-weight: 600;
     height: 35px;
-    width: 70px;
+    width: 75px;
 }
 
 button:hover{
+    transition: opacity .6s;
     opacity: 50%;
 }
 
 button:active{
+    transition: opacity .6s;
     opacity: 90%;
 }
 
 .submit-btn{
     color: white;
     background-color: #007dff;
+    height: 35px;
+    width: 100px;
 }
 
 input {
@@ -104,6 +138,7 @@ input {
 }
 
 input::placeholder {
+    font-family: 'Pacifico', cursive;
     padding-left: 7px;
 }
 
@@ -116,6 +151,7 @@ input:focus::placeholder {
 /* Table Tasks*/
 
 .btn-form{
+    
     display: inline;
 }
 
@@ -123,9 +159,13 @@ input:focus::placeholder {
     width: 100%;
 }
 
+.row-title{
+    text-align: center;
+    font-family: 'Pacifico', cursive;
+}
+
 .row{
     text-align: center;
-
 }
 
 .incomplete {
@@ -148,6 +188,9 @@ input:focus::placeholder {
     background-color: #fa5353;
 }
 
+.page_num:hover{
+    background-color: #ffd2d2;
+}
 
 /* Auth */
 
@@ -163,7 +206,7 @@ input:focus::placeholder {
     border-left: 2px solid rgb(179, 179, 179);
     display: flex;
     flex-direction: column;
-    height: 300px;
+    height: 400px;
 }
 .login-form {
     border-radius: 10px;
@@ -172,7 +215,7 @@ input:focus::placeholder {
     color: white;
     display: flex;
     flex-direction: column;
-    height: 300px;
+    height: 400px;
 }
 
 .input-items{
