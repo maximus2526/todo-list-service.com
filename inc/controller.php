@@ -76,6 +76,7 @@ class TodoController{
     
     public function delTodosAction(){
         $this->fkeyCheck();
+
         if(empty($_SESSION['errors']))
             $this->modelobj->deleteTodo($this->todo_id);
         header("Location: /");
