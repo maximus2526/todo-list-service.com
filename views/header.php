@@ -14,7 +14,7 @@
     <div class="container">
         <div class="header">
                 <div class="logo">
-                    <a href="/"> <img class="logo-img" src="<?php echo get_url()?>/views/img/logo.png" alt="TODO"> </a>
+                    <a href="/"> <h1>Todos</h1> </a>
                 </div>
                 <nav class="nav">
                     <a href="/?action=about" class="nav-elem">About</a>

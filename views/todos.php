@@ -1,5 +1,5 @@
 <div class="content">
-    <h1>Todos</h1>
+    <h2>Todos page</h2>
     <div class="add-task">
         <div class="block-title">
             <p block-title>Add a task</p>
@@ -7,7 +7,7 @@
         <form action="/?action=add" method = "POST" class="block-form">
             <label>Item</label>
             <input name="todo_item" placeholder="What do you want to do?" type="text">
-            <p>Enter what you want to procastinate</p>
+            <p>Enter what you want to procastinate)</p>
             <button class="submit-btn" type="submit">Submit</button>
         </form>
     </div>
