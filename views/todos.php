@@ -36,13 +36,13 @@
                     <td>
                         <form 
                         class = "btn-form" 
-                        action="/?action=<?php echo $entry['todo_status']?>&todo_id=<?php echo $entry['todo_id']?>" 
+                        action="/?action=<?php echo $entry['todo_status']?>&todo_id=<?php echo $entry['todo_id']?>#form" 
                         method = "POST">
                             <button class="<?php echo $entry['todo_status']?>-btn" type="submit">
                                 <?php echo ucfirst($entry['todo_status'])?>
                             </button>
                         </form>
-                        <form class = "btn-form" action="/?action=delete&todo_id=<?php echo $entry['todo_id']?>" method = "POST">
+                        <form class = "btn-form" action="/?action=delete&todo_id=<?php echo $entry['todo_id']?>#form" method = "POST">
                             <button class="delete-btn" type="submit">Delete</button>
                         </form>
                     </td>
@@ -54,7 +54,7 @@
 
         </table> 
     </div>
-    <form action="" method="get">
+    <form id='form' action="#form" method="get">
         <?php 
         if (count($pages) > 1 ):
             foreach($pages as $pagenum):  
