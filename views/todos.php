@@ -32,7 +32,10 @@
             foreach($todoes as $entry):  ?>
                 <tr class = 'row'>
                     <td class='<?php echo $entry['todo_status']?>'><?php echo $entry['todo_item'] ?></td>
-                    <td><?php echo $entry['todo_status'] ?></td>
+                    <td><?php echo $entry['todo_status'] == 'complete' ? 'in'.$entry['todo_status']: 'complete'; ?>
+
+                    
+                    </td>
                     <td>
                         <form 
                         class = "btn-form" 

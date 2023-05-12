@@ -1,87 +1,69 @@
 <?php
 
-class TodoController{
-    public $modelobj;
+class Todo_Controller{
+    public $model;
     public $todo_id;
-    public $todo_item;
-    public $limit_per_page;
-    public $tamplate_data;
-
-    public function __construct($modelobj){
-        session_start();
-        $this->limit_per_page = 10;
-        $this->modelobj = $modelobj;
+    public function __construct($model){
+        $this->model = $model;
         $this->todo_id = $_GET['todo_id'];
-        $this->todo_item = $_POST['todo_item'];
-        $this->setTamplateData();
-        
     }
 
-    private function fkeyCheck(){
-        if(!$this->modelobj->isEntryExist($this->todo_id))
-            $this->setError($this->todo_id.'- entry does not exist!');
-    }
-    private function setTamplateData(){
-        $page_num = !$_GET['page_num'] ? 1 : $_GET['page_num'];
-        $page_options = [
-            'page_num' => $page_num,
-            'entries_limit' => $this->limit_per_page,
-        ];
-        $this->tamplate_data = [
-            'todoes' => $this->modelobj->getPaginatedTodosAction($page_options),
-            'pages' => $this->modelobj->getCountOfButtonsAction($page_options), 
-        ];
-    }
-
-    public function setError(string $error){
+    public function set_error(string $error){
         $_SESSION['errors'][] = $error;
     }
 
-    public function renderMainPage(){
-        render('todos', $this->tamplate_data); 
+    public function render_main_page_action(){
+        $page_num = !$_GET['page_num'] ? 1 : $_GET['page_num'];
+        $page_options = [
+            'page_num' => $page_num,
+            'entries_limit' => PAGE_LIMIT,
+        ];
+        $tamplate_data = [
+            'todoes' => $this->model->get_paginated_todos($page_options),
+            'pages' => $this->model->get_count_of_buttons($page_options), 
+        ];
+        render('todos', $tamplate_data); 
     }
 
-    public function renderAbout(){
+    public function render_about_action(){
         render('about'); 
     }
 
-    public function renderAuth(){
+    public function render_auth_action(){
         render('auth'); 
     }
 
-    public function addTodo(){
+    public function add_todo_action(){
+        $todo_item = strip_tags($_POST['todo_item']);
         $params = [
             'user' => 'admin',
             'todo_status' => 'complete',
-            'todo_item' => strip_tags($this->todo_item)
+            'todo_item' => $todo_item
         ]; 
         
-        if(strlen($this->todo_item) > 100){
-            $this->setError('Your todo greater then 100 chars!');
-            header("Location: /");      
-        } elseif(strlen($this->todo_item) < 4) {
-            $this->setError('Your todo lesser then 4 chars! Type more!');
-            header("Location: /"); 
-        }
-        else {
-            $this->modelobj->addTodoAction($params);
-            header("Location: /");
-        }
+        if(strlen($todo_item) > 100)
+            $this->set_error('Your todo greater then 100 chars!');  
+        elseif(strlen($todo_item) < 4)
+            $this->set_error('Your todo lesser then 4 chars! Type more!');
+        else
+            $this->model->add_todo($params);
+        redirect();
     }
     
-    public function changeStatus(string $todo_status){
-        $this->fkeyCheck();
+    public function change_status_action(string $todo_status){
+        if(!$this->model->is_entry_exist($this->todo_id))
+            $this->set_error($this->todo_id.'- entry does not exist!');
         if(empty($_SESSION['errors']))
-            $this->modelobj->changeStatus($this->todo_id, $todo_status);
-        header("Location: /");
+            $this->model->change_status($this->todo_id, $todo_status);
+        redirect();
     }
     
-    public function delTodos(){
-        $this->fkeyCheck();
-
+    public function del_todos_action(){
+        if(!$this->model->is_entry_exist($this->todo_id))
+            $this->set_error($this->todo_id.'- entry does not exist!');
         if(empty($_SESSION['errors']))
-            $this->modelobj->deleteTodoAction($this->todo_id);
-        header("Location: /");
+            $this->model->delete_todo($this->todo_id);
+        redirect();
             
     }
 
@@ -93,8 +75,8 @@ class AuthController{
 
 }
 
-$todo_model = new ToDoActions();
-$controller = new TodoController($todo_model);
+
+
 
 ?>
 

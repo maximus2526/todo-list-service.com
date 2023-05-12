@@ -1,13 +1,11 @@
 <?php
-return [
-    'dsn' => 'mysql:host=localhost;dbname=todo-service;charset=utf8', // DB info
-    'username' => 'root', 
-    'password' => '',
-    'options' => [
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-        PDO::ATTR_EMULATE_PREPARES => false,
-    ],
-];
+// DB Config, you can change on valid 
+define('DB_USERNAME', 'root');
+define('DB_PASSWORD', '');
+define('DB_HOST', 'localhost');
+define('DB_NAME', 'todo-service');
+
+// Change the value to increase the number of output that does appear on the page
+define('PAGE_LIMIT', 10);
 
 ?>

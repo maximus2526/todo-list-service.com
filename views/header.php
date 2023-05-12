@@ -14,11 +14,11 @@
     <div class="container">
         <div class="header">
                 <div class="logo">
-                    <a href="/"> <h1>Todos</h1> </a>
+                    <a href="<?php echo get_url() ?>"> <h1>Todos</h1> </a>
                 </div>
                 <nav class="nav">
-                    <a href="/?action=about" class="nav-elem">About</a>
-                    <a href="/?action=auth" class="nav-elem">Login</a>
+                    <a href="<?php echo get_url() ?>/?action=about" class="nav-elem">About</a>
+                    <a href="<?php echo get_url() ?>/?action=auth" class="nav-elem">Login</a>
                 </nav>
         </div>
         <?php if (!empty($_SESSION['errors'])): ?>

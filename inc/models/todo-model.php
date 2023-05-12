@@ -1,56 +1,69 @@
 
 <?php 
-    include_once 'db-model.php';
-    class ToDoActions extends Connection{
-        private $table;
-        private $fk_column;
+    class Todo_Model{
+        private $pdo;
 
-        function __construct(){
-            parent::__construct();
-            $this->table = 'to-does';
-            $this->fk_column = 'todo_id';
+        function __construct($pdo){
+            $this->pdo = $pdo;
         }
-        
-        public function isEntryExist(int $entries_id){
-            $sql = "SELECT COUNT(*) FROM `{$this->table}` 
-            WHERE `{$this->fk_column}` = '{$entries_id}';";
-            $count_of_values = $this->execQuery($sql)->fetchColumn();
+
+        public function is_entry_exist(int $entries_id){
+            $sql = "SELECT COUNT(*) FROM `to-does` 
+            WHERE `todo_id` = '{$entries_id}';";
+            $statement = $this->pdo->prepare($sql);
+            $statement->execute();
+            $count_of_values = $statement->fetchColumn();
             return $count_of_values > 0; 
         }
 
-        public function addTodoAction(array $todo_info){
-            $this->addEntry($todo_info, $this->table);
+        public function add_todo($params){
+            // receive associative array, send data to db 
+            $params = [
+                'user' => $params['user'], 
+                'todo_status' => $params['todo_status'], 
+                'todo_item' => $params['todo_item']
+            ];
+            $sql = "INSERT INTO `to-does` (user, todo_status, todo_item) VALUES (:user, :todo_status, :todo_item);";
+            $statement = $this->pdo->prepare($sql);
+            $statement->execute($params);
         }
 
-        public function deleteTodoAction(int $entries_id){
-            $this->deleteEntry($entries_id, $this->table, $this->fk_column);
+        public function delete_todo(int $entries_id){
+            $sql = "DELETE FROM `to-does` WHERE `todo_id` = '{$entries_id}';";
+            $statement = $this->pdo->prepare($sql);
+            $statement->execute();
         }
-        public function getCountOfButtonsAction(array $options){
-            $sql = "SELECT * FROM `{$this->table}`;";
-            $all_todoes = $this->execQuery($sql)->fetchAll();
-            if(empty($all_todoes)){
+        public function get_count_of_buttons(array $options){
+            $sql = "SELECT COUNT(*) FROM `to-does`;";
+            $statement = $this->pdo->prepare($sql);
+            $statement->execute();
+            $todoes_count = $statement->fetchColumn();
+            if(empty($todoes_count)){
                 return array();
             }
-            return range(1, count(array_chunk($all_todoes, $options['entries_limit'])));
+            return range(1, count(array_chunk(range(1, $todoes_count), $options['entries_limit'])));
         }
-        public function getPaginatedTodosAction(array $options){
-            $offset = ($options['page_num'] - 1)*$options['entries_limit'] ;
-            $sql = "SELECT * FROM `{$this->table}` ORDER BY `{$this->table}`.`todo_id`
-            ASC LIMIT {$options['entries_limit']} OFFSET {$offset};";
-            return $this->execQuery($sql)->fetchAll();
-        }
-
-        public function changeStatus(int $entries_id, string $todo_status){
-            $sql = "UPDATE `{$this->table}` SET `todo_status` = '{$todo_status}' 
-                    WHERE `{$this->table}`.`{$this->fk_column}` = {$entries_id};";
-            $this->execQuery($sql);
-
+        
+        public function get_paginated_todos(array $options){
+            $offset = ($options['page_num'] - 1) * $options['entries_limit'];
+            $sql = "SELECT * FROM `to-does` ORDER BY `to-does`.`todo_id` DESC LIMIT {$options['entries_limit']} OFFSET {$offset};";
+            $statement = $this->pdo->prepare($sql);
+            $statement->execute();
+            $paginated_todos = $statement->fetchAll();
+            return $paginated_todos;
         }
 
+        public function change_status(int $entries_id, string $todo_status){
+            $params = [
+                'todo_status' => $todo_status,
+                'entries_id' => $entries_id
+            ];
+            $sql = "UPDATE `to-does` SET `todo_status` = :todo_status 
+                WHERE `to-does`.`todo_id` = :entries_id;";
 
-
-
-
+            $statement = $this->pdo->prepare($sql);
+            $statement->execute($params);
+        }
 
     }
     ?>
