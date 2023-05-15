@@ -20,14 +20,17 @@
             }
         public function run(){
             include_once "models/todo-model.php";
+            include_once "models/auth-model.php";
             include_once "errors.php";
             $errors = new Errors;
             include_once "controller.php";
+            $auth_model = new Auth_Model($this->pdo);
             $todo_model = new Todo_Model($this->pdo);
             include_once 'helper.php';
-            $controller = new Todo_Controller($todo_model, $errors);
+            $todo_controller = new Todo_Controller($todo_model, $errors);
+            $auth_controller = new Auth_Controller($auth_model, $errors);
             include_once 'router.php';
-            $router = new Router($controller);
+            $router = new Router($todo_controller, $auth_controller);
             $router->route();
         }
 

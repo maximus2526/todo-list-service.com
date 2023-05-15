@@ -19,7 +19,11 @@
                 </div>
                 <nav class="nav">
                     <a href="<?php echo get_url() ?>/?action=about" class="nav-elem">About</a>
+                    <?php if (isset($_SESSION['user_id'])): ?>
+                    <p class="nav-elem">Hi, <?php echo $_SESSION['login'] ?>. <a href="<?php echo get_url() ?>/?action=logout">Logout.</a></p>
+                    <?php else: ?>
                     <a href="<?php echo get_url() ?>/?action=auth" class="nav-elem">Login</a>
+                    <?php endif; ?>
                 </nav>
         </div>
         

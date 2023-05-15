@@ -1,31 +1,47 @@
 
 <?php 
-    include_once 'db-model.php';
-    class Auth_actions {
-        public function log_in(array $user_info){
-            
-        }
-        public function add_user(array $user_info){
-            // receive associative array, send data to db 
-            $user_info["password"] = password_hash($user_info["password"], PASSWORD_DEFAULT);
-            $keys = implode(', ', array_keys($user_info));
-            $prepared_syntax = implode( ', ', array_map(array($this, 'get_parametrize_value'), array_keys($user_info)));
-            $sql = "INSERT INTO `users` ({$keys}) VALUES ({$prepared_syntax});";
-            // $this->execQuery($sql, $user_info);
+    class Auth_Model {
+        private $pdo;
+
+        function __construct($pdo){
+            $this->pdo = $pdo;
         }
 
-        public function delete_user(int $entries_id){
-            $sql = "DELETE FROM `users` WHERE `user_id` = $entries_id;";
-            
+        public function get_user_id($user_name){
+            $params = ['user_name' => $user_name ];
+            $sql = "SELECT `user_id` FROM `users` WHERE  `user_name` = :user_name;";
+            $statement = $this->pdo->prepare($sql);
+            $statement->execute($params);
+            return $statement->fetchColumn();
         }
-        
+
+        public function check_password($password, $user_id){
+            $params = ['user_id' => $user_id ];
+            echo $user_id;
+            $sql = "SELECT `user_password` FROM `users` WHERE `user_id` = :user_id;";
+            $statement = $this->pdo->prepare($sql);
+            $statement->execute($params);
+            $hash = $statement->fetchColumn();
+            return password_verify($password, $hash);
+        }
+        public function log_in($user_name){
+            $_SESSION["user_id"] = $this->get_user_id($user_name);
+        }
+
+        public function log_out(){
+            unset($_SESSION["user_id"]);
+        }
+
+        public function add_user($login, $password){
+            $crypted_password = password_hash($password, PASSWORD_DEFAULT);
+            $params = [
+                'user_name' => $login, 
+                'user_password' => $crypted_password, 
+            ];
+            $sql = "INSERT INTO `users` (user_name, user_password) VALUES (:user_name, :user_password);";
+            $statement = $this->pdo->prepare($sql);
+            $statement->execute($params);
+        }
 
     }
-
-
-    class UserActions extends Auth_actions{
-       
-
-    }   
-    ?>
 

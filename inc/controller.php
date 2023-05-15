@@ -22,7 +22,13 @@ class Todo_Controller{
             'pages' => $this->model->get_count_of_buttons($page_options), 
             'errors' => $this->errors, 
         ];
-        render('todos', $tamplate_data); 
+        if($_SESSION['user_id']){
+            render('todos', $tamplate_data);
+        } else{
+            render('about', $tamplate_data);
+        }
+
+         
     }
 
     public function render_about_action(){
@@ -42,7 +48,7 @@ class Todo_Controller{
     public function add_todo_action(){
         $todo_item = strip_tags($_POST['todo_item']);
         $params = [
-            'user' => 'admin',
+            'user_name' => $_SESSION['login'],
             'todo_status' => 'complete',
             'todo_item' => $todo_item
         ]; 
@@ -81,7 +87,49 @@ class Todo_Controller{
 
 }
 
-class AuthController{
+class Auth_Controller{
+    public $errors;
+    public $todo_auth;
+    public function __construct($todo_auth, $errors){
+        $this->todo_auth = $todo_auth;
+        $this->errors = $errors;
+    }
+    public function login_action(){
+        $login = $_POST['user_login'];
+        $user_id = $this->todo_auth->get_user_id($login);
+        $password = $_POST['user_password'];
+        if ($this->todo_auth->check_password($password, $user_id)){
+            $this->todo_auth->log_in($login);
+            $_SESSION['login'] = $login;
+            redirect();
+        } else {
+            echo $user_id;
+            var_dump($this->todo_auth->check_password($password, $user_id));
+            echo 'Invalid password!';
+        }
+
+        
+    }
+    public function add_user_action(){
+        $login = $_POST['user_login'];
+        $password = $_POST['user_password'];
+        $password_repeat = $_POST['user_password2'];
+        if ($password == $password_repeat){
+            $this->todo_auth->add_user($login, $password);
+            $this->login_action();
+        } else {
+            echo 'Невірний пароль';
+            // Ошибка
+        }
+
+    }
+    public function log_out(){
+        if(isset($_SESSION["user_id"])){
+            $this->todo_auth->log_out();
+        }
+        redirect();
+    }
+
 
 }
 

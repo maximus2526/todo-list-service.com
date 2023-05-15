@@ -76,12 +76,13 @@ a {
 }
 
 .logo-img {
-    width: 30%;
+    width: 20%;
 }
 .nav {
-    width: 15%;
+    width: 20%;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 .nav-elem {
     display: block;
