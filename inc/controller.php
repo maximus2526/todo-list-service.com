@@ -26,11 +26,17 @@ class Todo_Controller{
     }
 
     public function render_about_action(){
-        render('about'); 
+        $tamplate_data = [
+            'errors' => $this->errors, 
+        ];
+        render('about', $tamplate_data); 
     }
 
     public function render_auth_action(){
-        render('auth'); 
+        $tamplate_data = [
+            'errors' => $this->errors, 
+        ];
+        render('auth', $tamplate_data); 
     }
 
     public function add_todo_action(){
@@ -42,9 +48,9 @@ class Todo_Controller{
         ]; 
         
         if(strlen($todo_item) > 100)
-            $this->errors->add_error('Your todo greater then 100 chars!');  
+            $this->errors->get_error('Your todo greater then 100 chars!');  
         elseif(strlen($todo_item) < 4)
-            $this->errors->add_error('Your todo lesser then 4 chars! Type more!');
+            $this->errors->get_error('Your todo lesser then 4 chars! Type more!');
         else
             $this->errors->get_message('Todo added successfully!'); 
             if (!$this->errors->has_errors())
@@ -56,7 +62,7 @@ class Todo_Controller{
     
     public function change_status_action(string $todo_status){
         if(!$this->model->is_entry_exist($this->todo_id))
-            $this->errors->add_error($this->todo_id.'- entry does not exist!');
+            $this->errors->get_error($this->todo_id.'- entry does not exist!');
         if(!$this->errors->has_errors())
             $this->model->change_status($this->todo_id, $todo_status);
         redirect();
@@ -64,7 +70,7 @@ class Todo_Controller{
     
     public function del_todos_action(){
         if(!$this->model->is_entry_exist($this->todo_id))
-            $this->errors->add_error($this->todo_id.'- entry does not exist!');
+            $this->errors->get_error($this->todo_id.'- entry does not exist!');
         if(!$this->errors->has_errors())
             $this->model->delete_todo($this->todo_id);
         redirect();

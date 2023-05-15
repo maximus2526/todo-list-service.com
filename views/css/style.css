@@ -51,6 +51,17 @@ a {
     background: #c2f7bd;
 }
 
+.massage:hover{
+    transition: opacity .6s;
+    opacity: 70%;
+    
+}
+
+
+.massage-text{
+    margin-left: 30px;
+}
+
 
 
 .header {

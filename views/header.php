@@ -22,18 +22,11 @@
                     <a href="<?php echo get_url() ?>/?action=auth" class="nav-elem">Login</a>
                 </nav>
         </div>
+        
         <?php 
-        
-        if (!$errors->has_errors()){
-            $errors->show_massage();
-        } else{
-            $errors->show_error(); 
-        }   
-             
-    
-       
-        
-        
+
+        $errors->display();
+ 
         ?>
 
         

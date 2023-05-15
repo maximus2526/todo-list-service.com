@@ -4,7 +4,7 @@ class Errors{
         return !empty($_SESSION['errors']);
     }
 
-    public function add_error(string $error_text){
+    public function get_error(string $error_text){
         $_SESSION['errors'][] = $error_text;
     }
 
@@ -12,7 +12,7 @@ class Errors{
         $_SESSION['success'] = $message_text;
     }
 
-    public function show_massage(){
+    public function tamplate_massage(){
         if (!empty($_SESSION['success'])){
             echo "<div class='massage'>";
             $message = $_SESSION['success'];
@@ -22,7 +22,7 @@ class Errors{
         }   
     }
 
-    public function show_error(){
+    public function tamplate_error(){
         if (!empty($_SESSION['errors'])){
             echo "<div class='errors'>";
             foreach ($_SESSION['errors'] as $error){
@@ -30,9 +30,19 @@ class Errors{
             }     
             echo "</div>";
             $this->clean();
-        }  
-        
+        }   
     }
+
+
+    public function display(){
+        if (!$this->has_errors()){
+            $this->tamplate_massage();
+        } else{
+            $this->tamplate_error(); 
+        }  
+    }
+
+    
     public function clean(){
         unset($_SESSION['errors']); 
         unset($_SESSION['success']); 
