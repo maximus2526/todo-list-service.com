@@ -18,20 +18,20 @@
             if (!$this->pdo)  
                 $this->pdo = new PDO($dns, DB_USERNAME, DB_PASSWORD, $this->PDO_OPTIONS);
             }
-
         public function run(){
-
             include_once "models/todo-model.php";
+            include_once "errors.php";
+            $errors = new Errors;
             include_once "controller.php";
             $todo_model = new Todo_Model($this->pdo);
-
             include_once 'helper.php';
-
-            $controller = new Todo_Controller($todo_model);
+            $controller = new Todo_Controller($todo_model, $errors);
             include_once 'router.php';
             $router = new Router($controller);
             $router->route();
         }
+
+
         
     }
 
