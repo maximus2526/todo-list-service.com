@@ -3,6 +3,7 @@
     include_once 'db-model.php';
     class Auth_actions {
         public function log_in(array $user_info){
+            
         }
         public function add_user(array $user_info){
             // receive associative array, send data to db 
@@ -15,7 +16,7 @@
 
         public function delete_user(int $entries_id){
             $sql = "DELETE FROM `users` WHERE `user_id` = $entries_id;";
-            // $this->execQuery($sql);
+            
         }
         
 
