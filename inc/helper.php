@@ -6,8 +6,8 @@ function get_actions_url(){
     // URL for action
 }
 
-function redirect(){
-    header("Location: /");
+function redirect(string $path = ''){
+    header("Location: /".$path);
 }
 
 

@@ -31,19 +31,6 @@ class Todo_Controller{
          
     }
 
-    public function render_about_action(){
-        $tamplate_data = [
-            'errors' => $this->errors, 
-        ];
-        render('about', $tamplate_data); 
-    }
-
-    public function render_auth_action(){
-        $tamplate_data = [
-            'errors' => $this->errors, 
-        ];
-        render('auth', $tamplate_data); 
-    }
 
     public function add_todo_action(){
         $todo_item = strip_tags($_POST['todo_item']);
@@ -94,33 +81,66 @@ class Auth_Controller{
         $this->todo_auth = $todo_auth;
         $this->errors = $errors;
     }
+
+    public function render_auth_action(){
+        if(!$_SESSION['user_id']){
+            $tamplate_data = [
+                'errors' => $this->errors, 
+            ];
+            render('auth', $tamplate_data); 
+        }
+    }
     public function login_action(){
-        $login = $_POST['user_login'];
+        $login = strip_tags($_POST['user_login']);
         $user_id = $this->todo_auth->get_user_id($login);
         $password = $_POST['user_password'];
         if ($this->todo_auth->check_password($password, $user_id)){
-            $this->todo_auth->log_in($login);
+            if(!$this->errors->has_errors()){
+                $this->todo_auth->log_in($login);
+                $this->errors->get_message("You successfully logined!");
+            }
             $_SESSION['login'] = $login;
-            redirect();
         } else {
             echo $user_id;
             var_dump($this->todo_auth->check_password($password, $user_id));
-            echo 'Invalid password!';
-        }
-
-        
+            $this->errors->get_error('Invalid password!');
+        }    
+        redirect();  
     }
+
     public function add_user_action(){
-        $login = $_POST['user_login'];
-        $password = $_POST['user_password'];
-        $password_repeat = $_POST['user_password2'];
-        if ($password == $password_repeat){
+        $login = strip_tags($_POST['user_login']);
+        $password = strip_tags($_POST['user_password']);
+        $password_repeat = strip_tags($_POST['user_password2']);
+        $user_existense = $this->todo_auth->get_user_id($login);
+        if($user_existense){
+            $this->errors->get_error("Username is used.");
+            redirect('?action=auth');
+        }
+        else if ((strlen($login) < 5) or (strlen($login) > 20)){
+            $this->errors->get_error('The required login is more than 5 characters or less then 20 chars.');
+            redirect('?action=auth');
+        }
+        else if((strlen($password ) < 5) or (strlen($password ) > 25)){
+            $this->errors->get_error('Bad password. The required password is more than 5 characters and lesser then 25 chars. ');
+            redirect('?action=auth');
+        } 
+        else if($password != $password_repeat){
+            $this->errors->get_error("Passwords don't match");
+            redirect('?action=auth');
+        }
+        else if(!$this->errors->has_errors()){
             $this->todo_auth->add_user($login, $password);
             $this->login_action();
-        } else {
-            echo 'Невірний пароль';
-            // Ошибка
+            $this->errors->get_message("Register complete! You auto logined and redirected to main page.");
+            redirect();
+        } else{
+            redirect('?action=auth');
         }
+        
+
+
+        
 
     }
     public function log_out(){

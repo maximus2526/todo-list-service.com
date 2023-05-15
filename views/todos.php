@@ -48,6 +48,7 @@
                         <form class = "btn-form" action="/?action=delete&todo_id=<?php echo $entry['todo_id']?>#form" method = "POST">
                             <button class="delete-btn" type="submit">Delete</button>
                         </form>
+                        
                     </td>
                 </tr>
             <?php 

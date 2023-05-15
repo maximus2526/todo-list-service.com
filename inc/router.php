@@ -9,11 +9,8 @@
         }
         public function route(){
             switch($_GET['action']){
-                case 'about':
-                    $this->todo_controller->render_about_action();
-                    break;
                 case 'auth':
-                    $this->todo_controller->render_auth_action();
+                    $this->auth_controller->render_auth_action();
                     break;
                 case 'register':
                     $this->auth_controller->add_user_action();
