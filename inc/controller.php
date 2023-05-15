@@ -101,11 +101,9 @@ class Auth_Controller{
             }
             $_SESSION['login'] = $login;
         } else {
-            echo $user_id;
-            var_dump($this->todo_auth->check_password($password, $user_id));
             $this->errors->get_error('Invalid password!');
+            redirect('?action=auth');
         }    
-        redirect();  
     }
 
     public function add_user_action(){

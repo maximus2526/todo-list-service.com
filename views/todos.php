@@ -45,10 +45,23 @@
                                 <?php echo ucfirst($entry['todo_status'])?>
                             </button>
                         </form>
-                        <form class = "btn-form" action="/?action=delete&todo_id=<?php echo $entry['todo_id']?>#form" method = "POST">
-                            <button class="delete-btn" type="submit">Delete</button>
-                        </form>
-                        
+
+
+                            <form class="btn-form" method="POST">
+                                <button class="delete-btn" type="button" onclick="openPopup()">Delete</button>
+                            </form>
+
+                            <!-- Popup -->
+                            <div id="popup-overlay" class="popup-overlay">
+                                <form action="/?action=delete&todo_id=<?php echo $entry['todo_id']?>#form" class="btn-form" method="POST">
+                                    <div class="popup-content">
+                                        <span class="popup-close" onclick="closePopup()">&times;</span>
+                                        <p>You're sure you want to remove this item?</p>
+                                        <button class="popup-confirm-btn">Ok</button>
+                                    </div>
+                                </form>
+                            </div>
+
                     </td>
                 </tr>
             <?php 
