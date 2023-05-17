@@ -22,14 +22,15 @@
             include_once "models/todo-model.php";
             include_once "models/auth-model.php";
             include_once "errors.php";
+            include_once "inc/controllers/todo-controller.php";
+            include_once "inc/controllers/auth-controller.php";
+            include_once 'helper.php';
+            include_once 'router.php';
             $errors = new Errors;
-            include_once "controller.php";
             $auth_model = new Auth_Model($this->pdo);
             $todo_model = new Todo_Model($this->pdo);
-            include_once 'helper.php';
             $todo_controller = new Todo_Controller($todo_model, $errors);
             $auth_controller = new Auth_Controller($auth_model, $errors);
-            include_once 'router.php';
             $router = new Router($todo_controller, $auth_controller);
             $router->route();
         }
@@ -39,7 +40,7 @@
     }
 
     $app = new App();
-    
+    $app->run();
 
 
 
