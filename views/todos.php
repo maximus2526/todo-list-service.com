@@ -2,7 +2,7 @@
     <h2>Todos page</h2>
     <div class="add-task">
         <div class="block-title">
-            <p block-title>Add a task</p>
+            <p class="block-title">Add a task</p>
         </div>
         <form action="/?action=add" method = "POST" class="block-form">
             <label>Item</label>
@@ -68,7 +68,7 @@
             endforeach;
             ?>
         
-
+       
         </table> 
     </div>
     <form id='form' action="#form" method="get">

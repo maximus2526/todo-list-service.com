@@ -100,10 +100,12 @@ class Auth_Controller{
                 $this->errors->get_message("You successfully logined!");
             }
             $_SESSION['login'] = $login;
+            
         } else {
             $this->errors->get_error('Invalid password!');
             redirect('?action=auth');
-        }    
+        }   
+        redirect(); 
     }
 
     public function add_user_action(){

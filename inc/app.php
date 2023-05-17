@@ -3,12 +3,12 @@
 
     class App{
         public $pdo;
-        public $PDO_OPTIONS = array(
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-            PDO::ATTR_EMULATE_PREPARES => false,
-        );
+        public $PDO_OPTIONS;
         public function __construct(){
+            $this->PDO_OPTIONS = $PDO_OPTIONS = array(
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                PDO::ATTR_EMULATE_PREPARES => false);
             // create session
             if(empty($_SESSION))
                 session_start();
