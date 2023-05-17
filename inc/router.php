@@ -10,7 +10,7 @@
         public function route(){
             switch($_GET['action']){
                 case 'auth':
-                    $this->auth_controller->render_auth_action();
+                    $this->auth_controller->render_login_action();
                     break;
                 case 'register':
                     $this->auth_controller->add_user_action();

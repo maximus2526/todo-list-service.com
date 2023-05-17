@@ -91,9 +91,7 @@ a {
 
 /* content */
 .choice-category{
-    display: flex;
-    flex-direction: row;
-    padding: 20px;
+    margin-bottom: 20px;
 }
 .about-text{
     font-family: cursive;

@@ -6,7 +6,7 @@ class Auth_Controller{
         $this->todo_auth = $todo_auth;
     }
 
-    public function render_auth_action(){
+    public function render_login_action(){
         if(!$this->todo_auth->is_logged_in()){
             render('auth'); 
         }

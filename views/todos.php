@@ -8,14 +8,14 @@
             <label for="todo_item">Item</label>
             <input id="todo_item" name="todo_item" placeholder="What do you want to do?" type="text">
             <p>Enter what you want to procastinate)</p>
-            <p>Choice category:</p>
+            
             <div class="choice-category">
-                <label for="work">Work:</label>
-                <input type="radio" name="choiced-category" id="work" value="Work">
-                <label for="hobby">Hobby:</label>
-                <input type="radio" name="choiced-category" id="hobby" value="Hobby" >
-                <label for="study">Study:</label>
-                <input type="radio" name="choiced-category" id="study"  value="Study">
+                <label for="category">Choice category:</label>
+                <select id="category" name="choiced-category">
+                    <option value="Work">Work</option>
+                    <option value="Hobby">Hobby</option>
+                    <option value="Study">Study</option>
+                </select>
             </div>
             <button class="submit-btn" type="submit">Submit</button>
         </form>
@@ -34,9 +34,9 @@
             else:
             ?>
             <tr class = 'row-title'>
-                <th>Item</th>
-                <th>Category</th>
-                <th>Status</th>
+                <th><a href="/?action=sort&by=todo_item$order=">Item</a></th>
+                <th><a href="/?action=sort&by=todo_category$order=">Category</a></th>
+                <th><a href="/?action=sort&by=todo_status$order=">Status</a></th>
                 <th>Action</th>
             </tr>
             <?php 
