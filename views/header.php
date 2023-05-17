@@ -17,8 +17,8 @@
                 <div class="logo">
                     <a href="<?php echo get_url() ?>"> <h1>Todos</h1> </a>
                 </div>
-                <?php if (isset($_SESSION['user_id'])): ?>
-                <p class="nav-elem">Hi, <?php echo $_SESSION['login'] ?>. <a href="<?php echo get_url() ?>/?action=logout">Logout.</a></p>
+                <?php if ($is_logged_in): ?>
+                <p class="nav-elem">Hi, <?php echo $user_name ?>. <a href="<?php echo get_url() ?>/?action=logout">Logout.</a></p>
                 <?php else: ?>
                 <a href="<?php echo get_url() ?>/?action=auth" class="nav-elem">Login</a>
                 <?php endif; ?>
@@ -26,7 +26,7 @@
         
         <?php 
 
-        $errors->display();
+        Errors::display();
  
         ?>
 
