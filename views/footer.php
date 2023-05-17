@@ -4,7 +4,7 @@
                 </div>
                 <nav class="nav">
                     <a href="<?php echo get_url() ?>/" class="nav-elem">Main page</a>
-                    <?php if (isset($_SESSION['user_id'])): ?>
+                    <?php if ($is_logged_in): ?>
                     <a class="nav-elem" href="<?php echo get_url() ?>/?action=logout">Logout</a>
                     <?php else: ?>
                     <a href="<?php echo get_url() ?>/?action=auth" class="nav-elem">Login</a>

@@ -29,8 +29,8 @@
             $errors = new Errors;
             $auth_model = new Auth_Model($this->pdo);
             $todo_model = new Todo_Model($this->pdo);
-            $todo_controller = new Todo_Controller($todo_model, $errors);
-            $auth_controller = new Auth_Controller($auth_model, $errors);
+            $todo_controller = new Todo_Controller($todo_model, $auth_model);
+            $auth_controller = new Auth_Controller($auth_model);
             $router = new Router($todo_controller, $auth_controller);
             $router->route();
         }
