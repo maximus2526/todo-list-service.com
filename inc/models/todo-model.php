@@ -54,6 +54,7 @@
             $paginated_todos = $statement->fetchAll();
             return $paginated_todos;
         }
+        
 
         public function change_status(int $entries_id, string $todo_status){
             $params = [
