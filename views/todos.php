@@ -34,9 +34,9 @@
             else:
             ?>
             <tr class = 'row-title'>
-                <th><a href="/?action=sort&by=todo_item$order=">Item</a></th>
-                <th><a href="/?action=sort&by=todo_category$order=">Category</a></th>
-                <th><a href="/?action=sort&by=todo_status$order=">Status</a></th>
+                <th><a href="/?action=sort&by=todo_item$order=DESC">Item</a></th>
+                <th><a href="/?action=sort&by=todo_category$order=ASC">Category</a></th>
+                <th><a href="/?action=sort&by=todo_status$order=ASC">Status</a></th>
                 <th>Action</th>
             </tr>
             <?php 
