@@ -20,9 +20,11 @@
             $params = [
                 'user_name' => $params['user_name'], 
                 'todo_status' => $params['todo_status'], 
-                'todo_item' => $params['todo_item']
+                'todo_item' => $params['todo_item'],
+                'todo_category' => $params['todo_category']
+
             ];
-            $sql = "INSERT INTO `to-does` (user_name, todo_status, todo_item) VALUES (:user_name, :todo_status, :todo_item);";
+            $sql = "INSERT INTO `to-does` (user_name, todo_status, todo_item, todo_category) VALUES (:user_name, :todo_status, :todo_item, :todo_category);";
             $statement = $this->pdo->prepare($sql);
             $statement->execute($params);
         }

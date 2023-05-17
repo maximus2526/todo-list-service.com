@@ -1,7 +1,7 @@
-function openPopup() {
-    document.getElementById("popup-overlay").style.display = "block";
+function openPopup(todoId) {
+    document.getElementById("popup-overlay-" + todoId).style.display = "block";
 }
 
-function closePopup() {
-    document.getElementById("popup-overlay").style.display = "none";
+function closePopup(todoId) {
+    document.getElementById("popup-overlay-" + todoId).style.display = "none";
 }

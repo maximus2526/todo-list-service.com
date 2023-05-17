@@ -35,10 +35,15 @@ class Todo_Controller{
     public function add_todo_action(){
         if ($this->auth_model->is_logged_in()){
             $todo_item = strip_tags($_POST['todo_item']);
+            $todo_category = strip_tags($_POST['choiced-category']);
+            if(!$todo_category){
+                $todo_category = 'No category';
+            }
             $params = [
                 'user_name' => $_SESSION['login'],
                 'todo_status' => 'complete',
-                'todo_item' => $todo_item
+                'todo_item' => $todo_item,
+                'todo_category' => $todo_category
             ]; 
             
             if(strlen($todo_item) > 100){
@@ -64,10 +69,12 @@ class Todo_Controller{
     
     public function change_status_action(string $todo_status){
         if ($this->auth_model->is_logged_in()){
-            if(!$this->todo_model->is_entry_exist($this->todo_id))
+            if(!$this->todo_model->is_entry_exist($this->todo_id)){
                 Errors::set_error($this->todo_id.'- entry does not exist!');
-            if(!Errors::has_errors())
+            }
+            if(!Errors::has_errors()){
                 $this->todo_model->change_status($this->todo_id, $todo_status);
+            }  
             redirect();
         } else {
             redirect('?action=auth');
