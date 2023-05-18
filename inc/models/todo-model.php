@@ -51,7 +51,8 @@
             $param = [
                 'user_name' => $_SESSION['login'],
             ];
-            $sql = "SELECT * FROM `to-does` WHERE `user_name` = :user_name ORDER BY {$options['order_by']} {$options['order']} LIMIT {$options['entries_limit']} OFFSET {$offset};";
+            
+            $sql = "SELECT * FROM `to-does` WHERE `user_name` = :user_name {$options["category_query"]} ORDER BY {$options['order_by']} {$options['order']} LIMIT {$options['entries_limit']} OFFSET {$offset};";
             $statement = $this->pdo->prepare($sql);
             $statement->execute( $param );
             $paginated_todos = $statement->fetchAll();

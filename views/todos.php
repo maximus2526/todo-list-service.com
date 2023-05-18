@@ -12,6 +12,7 @@
             <div class="choice-category">
                 <label for="category">Choice category:</label>
                 <select id="category" name="choiced-category">
+                    <option value="" disabled selected>--select--</option>
                     <option value="Work">Work</option>
                     <option value="Hobby">Hobby</option>
                     <option value="Study">Study</option>
@@ -24,7 +25,7 @@
 
 
     <div class="tasks">
-        <form action="/?action=choice-category" method = "POST" class="block-form">
+        <form action="" method = "POST" class="block-form">
             <div class="choice-category">
                 <label for="choiced-category">Category:</label>
                 <select id="choiced-category" name="choiced-category-sort" onchange="this.form.submit()">
