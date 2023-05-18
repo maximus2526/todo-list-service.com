@@ -12,18 +12,21 @@ class Todo_Controller{
         $this->todo_id = $_GET['todo_id'];
     }
 
-
     public function render_main_page_action(){
+        if ($_POST['choiced-category-sort']){
+            $_SESSION['category'] = $_POST['choiced-category-sort'] == 'All' ? null : $_POST['choiced-category-sort'];
+            unset($_GET['page_num']);
+        }
         $this->page_options = [
             'page_num' => !$_GET['page_num'] ? 1 : $_GET['page_num'],
             'entries_limit' => PAGE_LIMIT,
             'order_by' => $_GET['order_by'] ? $_GET['order_by'] : 'todo_id',
             'order' => $_GET['order'] ? $_GET['order'] : 'ASC',
-            'category_query' => empty($_POST['choiced-category-sort']) ? "" : "AND `todo_category` = '{$_POST['choiced-category-sort']}'",
+            'category_query' => empty($_SESSION['category']) ? "" : "AND `todo_category` = '{$_SESSION['category']}'",
         ];
         $tamplate_data = [
             'todoes' => $this->todo_model->get_paginated_todos($this->page_options),
-            'pages' => $this->todo_model->get_count_of_buttons($this->page_options), 
+            'pages' => $this->todo_model->get_count_of_buttons($this->page_options) , 
             'is_logged_in' => $this->auth_model->is_logged_in(),
             'user_name' => $this->auth_model->get_authorizated_user_name(),
         ];

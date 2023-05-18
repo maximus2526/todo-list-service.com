@@ -5,12 +5,12 @@
             <p>Add a task</p>
         </div>
         <form action="/?action=add" method = "POST" class="block-form">
-            <label for="todo_item">Item</label>
+            <p class="label">Item</p>
             <input id="todo_item" name="todo_item" placeholder="What do you want to do?" type="text">
             <p>Enter what you want to procastinate)</p>
             
             <div class="choice-category">
-                <label for="category">Choice category:</label>
+                <p class="label">Choice category:</p>
                 <select id="category" name="choiced-category">
                     <option value="" disabled selected>--select--</option>
                     <option value="Work">Work</option>
@@ -27,12 +27,13 @@
     <div class="tasks">
         <form action="" method = "POST" class="block-form">
             <div class="choice-category">
-                <label for="choiced-category">Category:</label>
+                <p class="label">Category:</p>
                 <select id="choiced-category" name="choiced-category-sort" onchange="this.form.submit()">
                     <option value="" disabled selected>--select--</option>
                     <option value="Work">Work</option>
                     <option value="Hobby">Hobby</option>
                     <option value="Study">Study</option>
+                    <option value="All">All</option>
                 </select>
                 
             </div>

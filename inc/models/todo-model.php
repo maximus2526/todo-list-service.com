@@ -34,11 +34,15 @@
             $sql = "DELETE FROM `to-does` WHERE `todo_id` = '{$entries_id}';";
             $statement = $this->pdo->prepare($sql);
             $statement->execute();
-        }
-        public function get_count_of_buttons(array $options){
-            $sql = "SELECT COUNT(*) FROM `to-does`;";
+        } 
+        public function get_count_of_buttons(array $options){  
+            $param = [
+                'user_name' => $_SESSION['login'],
+            ];       
+
+            $sql = "SELECT COUNT(*) FROM `to-does` WHERE `user_name` = :user_name {$options["category_query"]};";
             $statement = $this->pdo->prepare($sql);
-            $statement->execute();
+            $statement->execute($param );
             $todoes_count = $statement->fetchColumn();
             if(empty($todoes_count)){
                 return array();
@@ -51,7 +55,6 @@
             $param = [
                 'user_name' => $_SESSION['login'],
             ];
-            
             $sql = "SELECT * FROM `to-does` WHERE `user_name` = :user_name {$options["category_query"]} ORDER BY {$options['order_by']} {$options['order']} LIMIT {$options['entries_limit']} OFFSET {$offset};";
             $statement = $this->pdo->prepare($sql);
             $statement->execute( $param );
