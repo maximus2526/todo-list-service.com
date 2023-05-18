@@ -24,6 +24,18 @@
 
 
     <div class="tasks">
+        <form action="/?action=choice-category" method = "POST" class="block-form">
+            <div class="choice-category">
+                <label for="choiced-category">Category:</label>
+                <select id="choiced-category" name="choiced-category-sort" onchange="this.form.submit()">
+                    <option value="" disabled selected>--select--</option>
+                    <option value="Work">Work</option>
+                    <option value="Hobby">Hobby</option>
+                    <option value="Study">Study</option>
+                </select>
+                
+            </div>
+        </form>
         <div class="block-title">
             <p>Tasks</p>
         </div>
@@ -34,9 +46,16 @@
             else:
             ?>
             <tr class = 'row-title'>
-                <th><a href="/?action=sort&by=todo_item$order=DESC">Item</a></th>
-                <th><a href="/?action=sort&by=todo_category$order=ASC">Category</a></th>
-                <th><a href="/?action=sort&by=todo_status$order=ASC">Status</a></th>
+                <th><a href="/?order_by=todo_item&order=<?php echo $_GET['order'] == 'DESC' ? 'ASC': 'DESC' ?>">
+                    <?php echo "Item" . (($_GET['order'] == 'DESC' and $_GET['order_by'] == 'todo_item') ? '↑' : '↓')?>
+                </a></th>
+                <th><a href="/?order_by=todo_category&order=<?php echo ($_GET['order'] == 'DESC' and $_GET['order_by'] == 'todo_category') ? 'ASC': 'DESC' ?>">
+                    <?php echo "Category" . (($_GET['order'] == 'DESC' and $_GET['order_by'] == 'todo_category') ?  '↑' : '↓' )?>
+                </a></th>
+                <th><a href="/?order_by=todo_status&order=<?php echo ($_GET['order'] == 'DESC' and $_GET['order_by'] == 'todo_status') ? 'ASC': 'DESC' ?>">
+                    <?php echo "Status" . (($_GET['order'] == 'DESC' and $_GET['order_by'] == 'todo_status') ?  '↑' : '↓' )?>
+                </a></th>
+
                 <th>Action</th>
             </tr>
             <?php 

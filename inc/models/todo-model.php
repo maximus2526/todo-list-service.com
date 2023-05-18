@@ -16,6 +16,7 @@
             return $count_of_values > 0; 
         }
 
+
         public function add_todo($params){
             $params = [
                 'user_name' => $params['user_name'], 
@@ -47,14 +48,16 @@
         
         public function get_paginated_todos(array $options){
             $offset = ($options['page_num'] - 1) * $options['entries_limit'];
-            $param = ['user_name' => $_SESSION['login']];
-            $sql = "SELECT * FROM `to-does` WHERE `user_name` = :user_name ORDER BY `to-does`.`todo_id` DESC LIMIT {$options['entries_limit']} OFFSET {$offset};";
+            $param = [
+                'user_name' => $_SESSION['login'],
+            ];
+            $sql = "SELECT * FROM `to-does` WHERE `user_name` = :user_name ORDER BY {$options['order_by']} {$options['order']} LIMIT {$options['entries_limit']} OFFSET {$offset};";
             $statement = $this->pdo->prepare($sql);
             $statement->execute( $param );
             $paginated_todos = $statement->fetchAll();
             return $paginated_todos;
         }
-        
+
 
         public function change_status(int $entries_id, string $todo_status){
             $params = [

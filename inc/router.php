@@ -30,9 +30,6 @@
                 case 'incomplete':
                     $this->todo_controller->change_status_action('complete'); 
                     break;
-                case 'sort':
-                    $this->todo_controller->sort_action();
-                    break;
                 case 'delete':
                     $this->todo_controller->del_todos_action();
                     break; 

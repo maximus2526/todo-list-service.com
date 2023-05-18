@@ -5,6 +5,7 @@ class Todo_Controller{
     public $auth_model;
     public $errors;
     public $todo_id;
+    public $page_options;
     public function __construct($todo_model, $auth_model){
         $this->todo_model = $todo_model;
         $this->auth_model = $auth_model;
@@ -14,9 +15,12 @@ class Todo_Controller{
 
     public function render_main_page_action(){
         $page_num = !$_GET['page_num'] ? 1 : $_GET['page_num'];
+        
         $page_options = [
             'page_num' => $page_num,
             'entries_limit' => PAGE_LIMIT,
+            'order_by' => $_GET['order_by'] ? $_GET['order_by'] : 'todo_id',
+            'order' => $_GET['order'] ? $_GET['order'] : 'ASC',
         ];
         $tamplate_data = [
             'todoes' => $this->todo_model->get_paginated_todos($page_options),
@@ -30,6 +34,7 @@ class Todo_Controller{
             render('about', $tamplate_data);
         }   
     }
+
 
 
     public function add_todo_action(){

@@ -142,6 +142,17 @@ button{
     width: 75px;
 }
 
+.btn-go{
+    border: none;
+    border-radius: 5px;
+    font-family: cursive;
+    font-weight: 600;
+    height: 100%;
+    width: 35px; 
+    background-color: #007dff;
+    color: #f2f2f2;
+}
+
 button:hover{
     transition: opacity .6s;
     opacity: 50%;
