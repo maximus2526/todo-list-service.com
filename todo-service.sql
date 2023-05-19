@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Май 16 2023 г., 10:06
+-- Время создания: Май 19 2023 г., 10:17
 -- Версия сервера: 5.7.33
 -- Версия PHP: 7.1.33
 
@@ -29,17 +29,23 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `to-does` (
   `todo_id` int(11) NOT NULL,
-  `user_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` int(11) NOT NULL,
   `todo_status` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `todo_item` text COLLATE utf8mb4_unicode_ci NOT NULL
+  `todo_item` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `todo_category` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Дамп данных таблицы `to-does`
 --
 
-INSERT INTO `to-does` (`todo_id`, `user_name`, `todo_status`, `todo_item`) VALUES
-(106, 'admin', 'complete', '4321423212434231');
+INSERT INTO `to-does` (`todo_id`, `user_id`, `todo_status`, `todo_item`, `todo_category`) VALUES
+(2, 1, 'incomplete', '2313212133', 'Work'),
+(4, 1, 'incomplete', '4322334', 'No category'),
+(5, 1, 'complete', '312413423423', 'Study'),
+(6, 1, 'complete', '3212321', 'Hobby'),
+(7, 1, 'complete', '23121331', 'Work'),
+(8, 1, 'complete', '321231213', 'Work');
 
 -- --------------------------------------------------------
 
@@ -58,8 +64,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `user_name`, `user_password`) VALUES
-(46, 'admin', '$2y$10$fOXesHPO6y5v7092PRSSOuAOIkes/VGpW4J/FoCPZ7EaQrKlmh6eS'),
-(47, 'admin3', '$2y$10$idN4WFP7Q6a048FrslPOtODZ3xnZtEJelxO.cOtRNWEGhEZWA0Af6');
+(1, 'admin', '$2y$10$nhgnaYUYz3nabCeuYDYgSe8gxJ8lhRGm2IUpAPycwf6K7LN61wi3u');
 
 --
 -- Индексы сохранённых таблиц
@@ -70,7 +75,7 @@ INSERT INTO `users` (`user_id`, `user_name`, `user_password`) VALUES
 --
 ALTER TABLE `to-does`
   ADD PRIMARY KEY (`todo_id`),
-  ADD KEY `user_name` (`user_name`);
+  ADD KEY `user_id` (`user_id`) USING BTREE;
 
 --
 -- Индексы таблицы `users`
@@ -87,13 +92,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `to-does`
 --
 ALTER TABLE `to-does`
-  MODIFY `todo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=107;
+  MODIFY `todo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
@@ -103,7 +108,7 @@ ALTER TABLE `users`
 -- Ограничения внешнего ключа таблицы `to-does`
 --
 ALTER TABLE `to-does`
-  ADD CONSTRAINT `to-does_ibfk_1` FOREIGN KEY (`user_name`) REFERENCES `users` (`user_name`) ON DELETE CASCADE;
+  ADD CONSTRAINT `to-does_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
