@@ -7,12 +7,12 @@ class Auth_Controller{
     }
 
     public function render_login_action(){
-        if(!$this->todo_auth->is_logged_in()){
+        if(!is_logged_in()){
             render('auth'); 
         }
     }
     public function login_action(){
-        if (!$this->todo_auth->is_logged_in()){
+        if (!is_logged_in()){
             $user_name = strip_tags($_POST['user_login']);
             $password = $_POST['user_password'];
             if ($this->todo_auth->check_password($password, $user_name)){
@@ -34,7 +34,7 @@ class Auth_Controller{
     }
 
     public function add_user_action(){
-        if (!$this->todo_auth->is_logged_in()){
+        if (!is_logged_in()){
             $user_name = htmlspecialchars($_POST['user_name']);
             $password = htmlspecialchars($_POST['user_password']);
             $password_repeat = htmlspecialchars($_POST['user_password_repeat']);
@@ -70,7 +70,7 @@ class Auth_Controller{
     }
 
     public function log_out(){
-        if($this->todo_auth->is_logged_in()){
+        if(is_logged_in()){
             $this->todo_auth->log_out();
         }
         redirect();
