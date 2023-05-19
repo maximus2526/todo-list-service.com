@@ -4,7 +4,7 @@ class Errors{
         return !empty($_SESSION['errors']);
     }
 
-    static public function set_error(string $error_text){
+    static public function add_error(string $error_text){
         $_SESSION['errors'][] = $error_text;
     }
 

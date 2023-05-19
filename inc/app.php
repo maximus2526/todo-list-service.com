@@ -19,12 +19,12 @@
                 $this->pdo = new PDO($dns, DB_USERNAME, DB_PASSWORD, $this->PDO_OPTIONS);
             }
         public function run(){
+            include_once 'helper.php';
             include_once "models/todo-model.php";
             include_once "models/auth-model.php";
             include_once "errors.php";
             include_once "inc/controllers/todo-controller.php";
             include_once "inc/controllers/auth-controller.php";
-            include_once 'helper.php';
             include_once 'router.php';
             $errors = new Errors;
             $auth_model = new Auth_Model($this->pdo);

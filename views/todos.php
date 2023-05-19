@@ -25,7 +25,7 @@
 
 
     <div class="tasks">
-        <form action="" method = "POST" class="block-form">
+        <form action="" method = "GET" class="block-form">
             <div class="choice-category">
                 <p class="label">Category:</p>
                 <select id="choiced-category" name="choiced-category-sort" onchange="this.form.submit()">

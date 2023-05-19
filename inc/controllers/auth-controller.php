@@ -24,11 +24,11 @@ class Auth_Controller{
                 }
                 
             } else {
-                Errors::set_error('Invalid password!');
+                Errors::add_error('Invalid password!');
                 redirect('?action=auth');
             }      
         } else {
-            Errors::set_error("User is logged in.");
+            Errors::add_error("User is logged in.");
             redirect();
         }
     }
@@ -40,19 +40,19 @@ class Auth_Controller{
             $password_repeat = htmlspecialchars($_POST['user_password_repeat']);
             $user_existense = $this->todo_auth->is_user_exist($user_name);
             if($user_existense == 1){
-                Errors::set_error("Username is used.");
+                Errors::add_error("Username is used.");
                 redirect('?action=auth');
             }
             else if ((strlen($user_name) < 5) or (strlen($user_name) > 20)){
-                Errors::set_error('The required login is more than 5 characters or less then 20 chars.');
+                Errors::add_error('The required login is more than 5 characters or less then 20 chars.');
                 redirect('?action=auth');
             }
             else if((strlen($password ) < 5) or (strlen($password ) > 25)){
-                Errors::set_error('Bad password. The required password is more than 5 characters and lesser then 25 chars. ');
+                Errors::add_error('Bad password. The required password is more than 5 characters and lesser then 25 chars. ');
                 redirect('?action=auth');
             } 
             else if($password != $password_repeat){
-                Errors::set_error("Passwords don't match");
+                Errors::add_error("Passwords don't match");
                 redirect('?action=auth');
             }
             else if(!Errors::has_errors()){
@@ -64,7 +64,7 @@ class Auth_Controller{
                 redirect('?action=auth');
             }
         } else {
-            Errors::set_error("User is logged in.");
+            Errors::add_error("User is logged in.");
             redirect();
         }
     }

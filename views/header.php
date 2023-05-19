@@ -17,10 +17,10 @@
                 <div class="logo">
                     <a href="<?php echo get_url() ?>"> <h1>Todos</h1> </a>
                 </div>
-                <?php if ($is_logged_in): ?>
-                <p class="nav-elem">Hi, <?php echo $user_name ?>. <a href="<?php echo get_url() ?>/?action=logout">Logout.</a></p>
+                <?php if (is_logged_in()): ?>
+                    <p class="nav-elem">Hi, <?php echo get_user_name() ?>. <a href="<?php echo get_url() ?>/?action=logout">Logout.</a></p>
                 <?php else: ?>
-                <a href="<?php echo get_url() ?>/?action=auth" class="nav-elem">Login</a>
+                    <a href="<?php echo get_url() ?>/?action=auth" class="nav-elem">Login</a>
                 <?php endif; ?>
         </div>
         

@@ -9,7 +9,13 @@ function get_actions_url(){
 function redirect(string $path = ''){
     header("Location: /".$path);
 }
+function get_user_name(){
+    return $_SESSION['login'];
+}
 
+function is_logged_in(){
+    return isset($_SESSION["user_id"]);
+}
 
 function render(string $name, array $tamplate_data = NULL){
     if(isset($tamplate_data))

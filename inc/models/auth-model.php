@@ -15,16 +15,7 @@
             $statement->execute($params);
             return $statement->fetchColumn(); 
         }
-
-
-
-        public function is_logged_in(){
-            return isset($_SESSION["user_id"]);
-        }
-        public function get_authorizated_user_name(){
-            return $_SESSION['login'];
-        }
-        
+ 
         public function check_password($password, $user_name){
             $params = ['user_name' => $user_name ];
             $sql = "SELECT `user_password` FROM `users` WHERE `user_name` = :user_name;";
