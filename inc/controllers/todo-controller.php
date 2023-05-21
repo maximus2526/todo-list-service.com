@@ -13,16 +13,16 @@ class Todo_Controller{
         if ($_GET['choiced-category-sort']){
             $category_query = $_GET['choiced-category-sort'] == 'All' ? null : $_GET['choiced-category-sort'];
         }
-        $page_options = [
+        $todo_options = [
             'page_num' => !$_GET['page_num'] ? 1 : $_GET['page_num'],
             'entries_limit' => PAGE_LIMIT,
             'order_by' => $_GET['order_by'] ? $_GET['order_by'] : 'todo_id',
-            'order' => $_GET['order'] ? $_GET['order'] : 'ASC',
+            'order' => $_GET['order'] ? $_GET['order'] : 'DESC',
             'category_query' => empty($category_query) ? "" : "AND `todo_category` = '{$_GET['choiced-category-sort']}'",
         ];
         $tamplate_data = [
-            'todoes' => $this->todo_model->get_paginated_todos($page_options),
-            'pages' => $this->todo_model->get_count_of_buttons($page_options) , 
+            'todoes' => $this->todo_model->get_paginated_todos($todo_options),
+            'pages' => $this->todo_model->get_count_of_buttons($todo_options), 
         ];
         if(is_logged_in()){
             render('todos', $tamplate_data);
@@ -30,7 +30,6 @@ class Todo_Controller{
             render('about', $tamplate_data);
         }   
     }
-
 
     public function add_todo_action(){
         if (is_logged_in()){
@@ -58,8 +57,9 @@ class Todo_Controller{
                 
             if (!Errors::has_errors()){
                 $this->todo_model->add_todo($params);
-            }  
+            }
             redirect();
+            
         } else {
             redirect('?action=auth');
         }
