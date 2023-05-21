@@ -28,6 +28,7 @@
         <form action="" method = "GET" class="block-form">
             <div class="choice-category">
                 <p class="label">Category:</p>
+                <input type="hidden" name="order" value="<?php echo $_GET['order'];?>">
                 <select id="choiced-category" name="choiced-category-sort" onchange="this.form.submit()">
                     <option value="" disabled selected>--select--</option>
                     <option value="Work">Work</option>
@@ -48,7 +49,7 @@
             else:
             ?>
             <tr class = 'row-title'>
-                <th><a href="/?order_by=todo_item&order=<?php echo $_GET['order'] == 'DESC' ? 'ASC': 'DESC' ?>">
+                <th><a href="/?order_by=todo_item&order=<?php echo ($_GET['order'] == 'DESC' and $_GET['order_by'] == 'todo_item') ? 'ASC': 'DESC' ?>">
                     <?php echo "Item" . (($_GET['order'] == 'DESC' and $_GET['order_by'] == 'todo_item') ? '↑' : '↓')?>
                 </a></th>
                 <th><a href="/?order_by=todo_category&order=<?php echo ($_GET['order'] == 'DESC' and $_GET['order_by'] == 'todo_category') ? 'ASC': 'DESC' ?>">
@@ -78,10 +79,6 @@
                             <button class="<?php echo $entry['todo_status']?>-btn" type="submit">
                                 <?php echo ucfirst($entry['todo_status'])?>
                             </button>
-                        </form>
-
-
-                            <form class="btn-form" method="POST">
                                 <button class="delete-btn" type="button" onclick="openPopup(<?php echo $entry['todo_id']; ?>)">Delete</button>
                             </form>
 
