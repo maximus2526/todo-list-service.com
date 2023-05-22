@@ -35,6 +35,7 @@ class Todo_Controller{
         if (is_logged_in()){
             $todo_item = strip_tags($_POST['todo_item']);
             $todo_category = strip_tags($_POST['choiced-category']);
+
             if(!$todo_category){
                 $todo_category = 'No category';
             }

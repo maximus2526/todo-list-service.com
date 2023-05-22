@@ -4,7 +4,7 @@
         <div class="block-title">
             <p>Add a task</p>
         </div>
-        <form action="/?action=add" method = "POST" class="block-form">
+        <form action="/?action=add&order=<?php echo $_GET['order'];?>&order_by=<?php echo $_GET['order_by'];?>" method = "POST" class="block-form">
             <p class="label">Item</p>
             <input id="todo_item" name="todo_item" placeholder="What do you want to do?" type="text">
             <p>Enter what you want to procastinate)</p>
